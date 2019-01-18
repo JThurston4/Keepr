@@ -8,9 +8,10 @@ namespace keepr.Models
     [Required]
     public string Name { get; set; }
     public int Views { get; set; }
-    public int Saves { get; set; }
+    public int Keeps { get; set; }
     [Required]
-    public string Image { get; set; }
+    public string Img { get; set; }
+    public int Shares { get; set; }
     [Required]
     public string UserName { get; set; }
     public List<Comment> Comments { get; set; }
