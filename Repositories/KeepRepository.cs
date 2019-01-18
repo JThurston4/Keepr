@@ -1,31 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using Dapper;
+using keepr.Models;
+
 namespace keepr.Repositories
 {
-  public class KeeprRepository
+  public class KeepRepository
   {
     private readonly IDbConnection _db;
 
-    public BurgerRepository(IDbConnection db)
+    public KeepRepository(IDbConnection db)
     {
       _db = db;
     }
-    public IEnumerable<Burger> GetAll()
+    public IEnumerable<Keep> GetAll()
     {
-      return _db.Query<Burger>("SELECT * FROM Burgers");
+      return _db.Query<Keep>("SELECT * FROM Keeps");
     }
 
-    public Burger AddBurger(Burger newBurger)
+    public Keep AddKeep(Keep newKeep)
     {
       int id = _db.ExecuteScalar<int>(@"
- 	      INSERT INTO Burgers (Name, Description, Price) Values(@Name, @Description, @Price);
- 	      SELECT LAST_INSERT_ID();", newBurger);
-      newBurger.Id = id;
-      return newBurger;
+ 	      INSERT INTO keeps (Name, Description, Img, UserId, isPrivate) Values(@Name, @Description, @Img, @UserId, @Secret);
+ 	      SELECT LAST_INSERT_ID();", newKeep);
+      newKeep.Id = id;
+      return newKeep;
     }
-    public Burger GetBurgerById(int id)
+    public Keep GetKeepById(int id)
     {
       try
       {
-        return _db.QueryFirstOrDefault<Burger>($"SELECT * FROM Burgers WHERE id = @id", new { id });
+        return _db.QueryFirstOrDefault<Keep>($"SELECT * FROM Keeps WHERE id = @id", new { id });
       }
       catch (Exception ex)
       {
@@ -34,18 +40,18 @@ namespace keepr.Repositories
       }
 
     }
-    public Burger EditBurger(int id, Burger newBurger)
+    public Keep EditKeep(int id, Keep newKeep)
     {
       try
       {
-        return _db.QueryFirstOrDefault<Burger>($@"
-          UPDATE burgers SET
+        return _db.QueryFirstOrDefault<Keep>($@"
+          UPDATE Keeps SET
             Name = @Name,
             Description = @Description,
             Price = @Price
           WHERE Id = @Id;
-          SELECT * FROM burgers WHERE id = @Id;
-        ", newBurger);
+          SELECT * FROM Keeps WHERE id = @Id;
+        ", newKeep);
       }
       catch (Exception ex)
       {
@@ -53,9 +59,9 @@ namespace keepr.Repositories
         return null;
       }
     }
-    public bool DeleteBurger(int id)
+    public bool DeleteKeep(int id)
     {
-      int success = _db.Execute("DELETE FROM Burgers WHERE id = @id", new { id });
+      int success = _db.Execute("DELETE FROM Keeps WHERE id = @id", new { id });
       if (success == 0)
       {
         return false;
