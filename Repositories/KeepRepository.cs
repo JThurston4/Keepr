@@ -40,6 +40,9 @@ namespace keepr.Repositories
       }
 
     }
+
+
+    //edit needs work
     public Keep EditKeep(int id, Keep newKeep)
     {
       try
@@ -59,6 +62,7 @@ namespace keepr.Repositories
         return null;
       }
     }
+    //edit needs work
     public bool DeleteKeep(int id)
     {
       int success = _db.Execute("DELETE FROM Keeps WHERE id = @id", new { id });

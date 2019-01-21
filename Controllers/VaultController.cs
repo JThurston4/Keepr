@@ -7,26 +7,26 @@ namespace keepr.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class KeepController : ControllerBase
+  public class VaultController : ControllerBase
   {
-    private readonly KeepRepository _keepRepo;
-    public KeepController(KeepRepository repo)
+    private readonly VaultRepository _vaultRepo;
+    public VaultController(VaultRepository repo)
     {
-      _keepRepo = repo;
+      _vaultRepo = repo;
     }
 
     // GET api/values
     [HttpGet]
     public ActionResult<IEnumerable<string>> Get()
     {
-      return Ok(_keepRepo.GetAll());
+      return Ok(_vaultRepo.GetAll());
     }
 
     //GET api/values/5
     [HttpGet("{id}")]
-    public ActionResult<Keep> Get(int id)
+    public ActionResult<Vault> Get(int id)
     {
-      Keep result = _keepRepo.GetKeepById(id);
+      Vault result = _vaultRepo.GetVaultById(id);
       if (result != null)
       {
         return Ok(result);
@@ -36,22 +36,22 @@ namespace keepr.Controllers
 
     // // POST api/values
     [HttpPost]
-    public Keep Post([FromBody] Keep value)
+    public Vault Post([FromBody] Vault value)
     {
       value.UserId = HttpContext.User.Identity.Name;
-      _keepRepo.AddKeep(value);
+      _vaultRepo.AddVault(value);
       return value;
     }
 
     // PUT api/values/5
     [HttpPut("{id}")]
-    public ActionResult<Keep> Put(int id, [FromBody] Keep value)
+    public ActionResult<Vault> Put(int id, [FromBody] Vault value)
     {
       if (value.Id == 0)
       {
         value.Id = id;
       }
-      Keep result = _keepRepo.EditKeep(id, value);
+      Vault result = _vaultRepo.EditVault(id, value);
       if (result != null)
       {
         return Ok(result);
@@ -63,7 +63,7 @@ namespace keepr.Controllers
     // [HttpDelete("{id}")]
     public ActionResult<string> Delete(int id)
     {
-      if (_keepRepo.DeleteKeep(id))
+      if (_vaultRepo.DeleteVault(id))
       {
         return "deleted burger";
       }

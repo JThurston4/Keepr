@@ -14,7 +14,7 @@ namespace keepr.Models
     [Required]
     public string Img { get; set; }
     public int Shares { get; set; }
-    [Required]
+    // [Required]
     public string UserId { get; set; }
     public bool Secret { get; set; }
     public List<Comment> Comments { get; set; }
