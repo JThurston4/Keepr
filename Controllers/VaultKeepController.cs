@@ -16,23 +16,29 @@ namespace keepr.Controllers
     }
 
     // GET api/values
-    [HttpGet]
-    public ActionResult<IEnumerable<string>> Get()
-    {
-      return Ok(_vaultKeepRepo.GetAll());
-    }
-
-    //GET api/values/5
     [HttpGet("{id}")]
-    public ActionResult<VaultKeep> Get(int id)
+    public ActionResult<IEnumerable<Keep>> Get(int id)
     {
-      VaultKeep result = _vaultKeepRepo.GetVaultKeepById(id);
+      var result = _vaultKeepRepo.GetVaultKeeps(id);
       if (result != null)
       {
         return Ok(result);
       }
       return BadRequest();
     }
+
+
+    //GET api/values/5
+    // [HttpGet("{id}")]
+    // public ActionResult<VaultKeep> Get(int id)
+    // {
+    //   VaultKeep result = _vaultKeepRepo.GetVaultKeepById(id);
+    //   if (result != null)
+    //   {
+    //     return Ok(result);
+    //   }
+    //   return BadRequest();
+    // }
 
     // POST api/values
     [HttpPost]
@@ -61,9 +67,9 @@ namespace keepr.Controllers
 
     // // DELETE api/values/5
     // [HttpDelete("{id}")]
-    public ActionResult<string> Delete(int id)
+    public ActionResult<string> Delete(VaultKeep value)
     {
-      if (_vaultKeepRepo.DeleteVaultKeep(id))
+      if (_vaultKeepRepo.DeleteVaultKeep(value))
       {
         return "deleted burger";
       }

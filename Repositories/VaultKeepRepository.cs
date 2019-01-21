@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using Dapper;
@@ -9,71 +8,58 @@ namespace keepr.Repositories
   public class VaultKeepRepository
   {
     private readonly IDbConnection _db;
-
     public VaultKeepRepository(IDbConnection db)
     {
       _db = db;
-    }
-    public IEnumerable<VaultKeep> GetAll()
-    {
-      return _db.Query<VaultKeep>("SELECT * FROM VaultKeeps");
+
     }
 
-    public VaultKeep AddVaultKeep(VaultKeep newVaultKeep)
+
+
+    //GetVaultKeeps
+    //Searching by vaultId and looking for all keeps with that vault id
+    public IEnumerable<VaultKeep> GetVaultKeeps(int id)
+    {
+      return _db.Query<VaultKeep>($@"
+        SELECT * FROM vaultkeeps vk
+        INNER JOIN keeps k ON k.id = vk.keepId
+        WHERE (vaultId = @id) 
+      ", new { id });
+      // WHERE (keepId = @id AND vk.userId = @UserId) 
+    }
+
+    // //GetLibrariesByVaultKeepId
+    // public IEnumerable<Library> GetLibrariesByVaultKeepId(int id)
+    // {
+    //   return _db.Query<Library>($@"
+    //     SELECT * FROM libraryvaultKeeps lb
+    //     INNER JOIN library l ON l.id = lb.libraryId
+    //     WHERE (vaultKeepId = @id);
+    //   ", new { id });
+    // }
+
+
+    //AddLibraryVaultKeep
+    public VaultKeep AddVaultKeep(VaultKeep vk)
     {
       int id = _db.ExecuteScalar<int>(@"
-        INSERT INTO vaultkeeps (VaultId, KeepId, UserId) Values(@VaultId, @KeepId, @UserId);
-        SELECT LAST_INSERT_ID();", newVaultKeep);
-      newVaultKeep.Id = id;
-      return newVaultKeep;
+      INSERT INTO vaultkeeps(vaultId, keepId, userId)
+      VALUES(@VaultId, @KeepId, @UserId);
+      SELECT LAST_INSERT_ID();
+      ", vk);
+      vk.Id = id;
+      return vk;
     }
-    public VaultKeep GetVaultKeepById(int id)
+
+    //DeleteVaultKeep
+
+    public bool DeleteVaultKeep(VaultKeep vk)
     {
-      try
-      {
-        return _db.QueryFirstOrDefault<VaultKeep>($"SELECT * FROM VaultKeeps WHERE id = @id", new { id });
-      }
-      catch (Exception ex)
-      {
-        System.Console.WriteLine(ex);
-        return null;
-      }
+      int success = _db.Execute(@"DELETE FROM vaultkeeps WHERE keepId = @KeepId AND vaultId = @vaultId", vk);
+      return success != 0;
 
     }
 
 
-    //edit needs work
-    // public VaultKeep EditVaultKeep(int id, VaultKeep newVaultKeep)
-    // {
-    //   try
-    //   {
-    //     return _db.QueryFirstOrDefault<VaultKeep>($@"
-    //       UPDATE VaultKeeps SET
-    //         Name = @Name,
-    //         Description = @Description,
-    //         Price = @Price
-    //       WHERE Id = @Id;
-    //       SELECT * FROM VaultKeeps WHERE id = @Id;
-    //     ", newVaultKeep);
-    //   }
-    //   catch (Exception ex)
-    //   {
-    //     System.Console.WriteLine(ex);
-    //     return null;
-    //   }
-    // }
-    //edit needs work
-    public bool DeleteVaultKeep(int id)
-    {
-      int success = _db.Execute("DELETE FROM VaultKeeps WHERE id = @id", new { id });
-      if (success == 0)
-      {
-        return false;
-      }
-      else
-      {
-        return true;
-      }
-    }
   }
 }
