@@ -66,12 +66,12 @@ namespace keepr.Controllers
     // }
 
     // // DELETE api/values/5
-    // [HttpDelete("{id}")]
+    [HttpDelete("{id}")]
     public ActionResult<string> Delete(VaultKeep value)
     {
       if (_vaultKeepRepo.DeleteVaultKeep(value))
       {
-        return "deleted burger";
+        return "deleted VaultKeep";
       }
       return "cant delte";
     }
