@@ -1,12 +1,16 @@
 <template>
-  <div class="home container-fluid">
-    <div class="row d-flex flex-wrap">
-      <div v-for="keep in gotKeeps" class="allKeeps card border-primary mb-3 col-xl-3 col-lg-4 col-md-6 col-sm-12"
-        style="max-width: 20rem;">
-        <div class="card-body">
-          <img class="keepImg" :src="keep.img">
-          <h4 class="card-title">{{keep.name}}</h4>
-          <p class="card-text">{{keep.description}}</p>
+  <div>
+    <Navbar></Navbar>
+    <div class="home container-fluid">
+      <div class="card-columns">
+        <div v-for="keep in gotKeeps">
+          <div class="card">
+            <img class="card-img-top" :src="keep.img" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{keep.name}}</h5>
+              <p class="card-text">{{keep.description}}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -14,6 +18,7 @@
 </template>
 
 <script>
+  import Navbar from "@/components/Navbar"
   export default {
     name: "home",
     mounted() {
@@ -47,6 +52,41 @@
     max-height: 30vh
   }
 
+  .card {
+    display: inline-block;
+  }
+
+  @media (min-width: 34em) {
+    .card-columns {
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2;
+    }
+  }
+
+  @media (min-width: 48em) {
+    .card-columns {
+      -webkit-column-count: 3;
+      -moz-column-count: 3;
+      column-count: 3;
+    }
+  }
+
+  @media (min-width: 62em) {
+    .card-columns {
+      -webkit-column-count: 4;
+      -moz-column-count: 4;
+      column-count: 4;
+    }
+  }
+
+  @media (min-width: 75em) {
+    .card-columns {
+      -webkit-column-count: 5;
+      -moz-column-count: 5;
+      column-count: 5;
+    }
+  }
 
   .allKeeps {
     display: flex;

@@ -45,7 +45,7 @@ export default new Vuex.Store({
         })
     },
     authenticate({ commit, dispatch }) {
-      debugger
+      // debugger
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
