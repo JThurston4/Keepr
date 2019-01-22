@@ -18,13 +18,13 @@ namespace keepr.Repositories
 
     //GetVaultKeeps
     //Searching by vaultId and looking for all keeps with that vault id
-    public IEnumerable<VaultKeep> GetVaultKeeps(int id)
+    public IEnumerable<Keep> GetVaultKeeps(int vaultId, string userId)
     {
-      return _db.Query<VaultKeep>($@"
+      return _db.Query<Keep>($@"
         SELECT * FROM vaultkeeps vk
         INNER JOIN keeps k ON k.id = vk.keepId
-        WHERE (vaultId = @id) 
-      ", new { id });
+        WHERE (vaultId = @id AND vk.userId = @userId) 
+      ", new { vaultId, userId });
       // WHERE (keepId = @id AND vk.userId = @UserId) 
     }
 
