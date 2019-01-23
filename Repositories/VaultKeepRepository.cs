@@ -28,18 +28,8 @@ namespace keepr.Repositories
       // WHERE (keepId = @id AND vk.userId = @UserId) 
     }
 
-    // //GetLibrariesByVaultKeepId
-    // public IEnumerable<Library> GetLibrariesByVaultKeepId(int id)
-    // {
-    //   return _db.Query<Library>($@"
-    //     SELECT * FROM libraryvaultKeeps lb
-    //     INNER JOIN library l ON l.id = lb.libraryId
-    //     WHERE (vaultKeepId = @id);
-    //   ", new { id });
-    // }
 
-
-    //AddLibraryVaultKeep
+    //AddVaultKeep
     public VaultKeep AddVaultKeep(VaultKeep vk)
     {
       int id = _db.ExecuteScalar<int>(@"

@@ -24,7 +24,8 @@ export default new Vuex.Store({
     vaults: [],
     profile: {},
     vaultKeep: [],
-    activeKeep: {}
+    activeKeep: {},
+    ActiveVaultId: 0
   },
   mutations: {
     setUser(state, user) {
@@ -46,9 +47,13 @@ export default new Vuex.Store({
       console.log("vaultKeep: ", state.vaultKeep)
     },
     setActiveKeep(state, keep) {
-      debugger
+      // debugger
       state.activeKeep = keep
-      console.log("activeKeep")
+      console.log("activeKeep: ", state.activeKeep)
+    },
+    setActiveVault(state, vaultId) {
+      state.ActiveVaultId = vaultId
+      console.log("Active vault: ", state.ActiveVaultId)
     }
   },
   actions: {
@@ -126,7 +131,20 @@ export default new Vuex.Store({
       api.get("VaultKeep/" + payload.vaultId)
         .then(res => {
           commit("setVaultKeep", res.data)
+          commit("setActiveVault", payload.vaultId)
           router.push("/vault")
+        })
+        .catch(e => {
+          // debugger
+          console.log("couldn't get vaultKeep")
+        })
+    },
+    //get vaultkeep by vault id and userid (same as above one but without router push)
+    getVaultKeep2({ commit, dispatch }, vaultId) {
+      // debugger
+      api.get("VaultKeep/" + vaultId)
+        .then(res => {
+          commit("setVaultKeep", res.data)
         })
         .catch(e => {
           // debugger
@@ -135,7 +153,7 @@ export default new Vuex.Store({
     },
     //get keep by keep id
     activeKeep({ commit, dispatch }, keepId) {
-      debugger
+      // debugger
       api.get("Keep/" + keepId)
         .then(res => {
           commit("setActiveKeep", res.data)
@@ -144,6 +162,32 @@ export default new Vuex.Store({
         .catch(e => {
           // debugger
           console.log("couldn't get Keep")
+        })
+    },
+    //save a keep to a vault (post in vaultKeep)
+    saveKeep({ commit, dispatch }, payload) {
+      // debugger
+      api.post("VaultKeep", payload)
+        .then(res => {
+          // debugger
+          dispatch("getVaultKeep2", payload.vaultId)
+        })
+        .catch(e => {
+          // debugger
+          console.log("couldn't save Keep")
+        })
+    },
+
+    //delete a keep from vault, pass it vault id in url and requires a vault id and keep id in payload
+    deleteKeepFromVault({ commit, dispatch }, payload) {
+      debugger
+      api.delete("VaultKeep/", { data: payload })
+        .then(res => {
+          dispatch("getVaultKeep2", payload.vaultId)
+        })
+        .catch(e => {
+          // debugger
+          console.log("couldn't delete Keep")
         })
     },
   }

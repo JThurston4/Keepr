@@ -66,9 +66,9 @@ namespace keepr.Controllers
     //   return NotFound();
     // }
 
-    // // DELETE api/values/5
-    [HttpDelete("{id}")]
-    public ActionResult<string> Delete(VaultKeep value)
+    // remove keep from vault keep, url needs vault id
+    [HttpDelete]
+    public ActionResult<string> Delete([FromBody]VaultKeep value)
     {
       if (_vaultKeepRepo.DeleteVaultKeep(value))
       {

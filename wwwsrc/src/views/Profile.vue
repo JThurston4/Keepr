@@ -1,5 +1,5 @@
 <template>
-  <div class="profile container-fluid">
+  <div class="profile container-fluid bg">
     <div class="row">
       <div class="card border-primary mb-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 vaultCards" v-for="vault in getVaults"
         style="max-width: 20rem;">
@@ -35,7 +35,7 @@
     methods: {
       getVaultKeep(vaultId) {
         // debugger
-        this.$store.dispatch("getVaultKeep", { vaultId: vaultId, userId: this.getUser.id })
+        this.$store.dispatch("getVaultKeep", { vaultId: vaultId })
       }
     },
     components: {},

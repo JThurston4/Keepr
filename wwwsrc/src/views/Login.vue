@@ -1,5 +1,5 @@
 <template>
-    <div class="login">
+    <div class="login bg">
         <form v-if="loginForm" @submit.prevent="loginUser">
             <div><input type="email" v-model="creds.email" placeholder="email"></div>
             <div><input type="password" v-model="creds.password" placeholder="password"></div>

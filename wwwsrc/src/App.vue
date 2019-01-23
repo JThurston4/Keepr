@@ -2,7 +2,7 @@
   <div id="app">
     <nav class="navbar navbar-dark bg-primary container-fluid">
       <div class="row w-100">
-        <div class="col-3 logo"><a class="navbar-brand" href="#"><i class="fas fa-lock"> Keepr</i></a>
+        <div class="col-3 logo"><a class="navbar-brand" href="#"><i class="fas fa-lock navIcon"> Keepr</i></a>
         </div>
         <div class="col-9 menuItems">
           <div class="row" v-if="getUser.id">
@@ -89,7 +89,13 @@
     justify-content: flex-start;
   }
 
-  .fa-lock {
+  .navIcon {
     font-size: 25px;
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0px;
+    z-index: 200;
   }
 </style>

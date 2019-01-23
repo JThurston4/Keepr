@@ -1,6 +1,12 @@
 <template>
-  <div class="keep">
-    hihi
+  <div class="keep bg">
+    <div class="card border-primary mb-3" style="max-width: 80vw;">
+      <div class="card-body">
+        <img :src="activeKeep.img" class="activeImg">
+        <h4 class="card-title">{{activeKeep.name}}</h4>
+        <p class="card-text">{{activeKeep.description}}</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,6 +34,7 @@
 </script>
 
 <style>
-
-
+  .activeImg {
+    max-width: 75vw;
+  }
 </style>
