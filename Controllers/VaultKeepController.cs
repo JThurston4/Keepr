@@ -19,7 +19,8 @@ namespace keepr.Controllers
     [HttpGet("{id}")]
     public ActionResult<IEnumerable<Keep>> Get(int id)
     {
-      var result = _vaultKeepRepo.GetVaultKeeps(id);
+      string userId = HttpContext.User.Identity.Name;
+      var result = _vaultKeepRepo.GetVaultKeeps(id, userId);
       if (result != null)
       {
         return Ok(result);

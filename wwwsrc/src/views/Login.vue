@@ -1,15 +1,15 @@
 <template>
     <div class="login">
         <form v-if="loginForm" @submit.prevent="loginUser">
-            <input type="email" v-model="creds.email" placeholder="email">
-            <input type="password" v-model="creds.password" placeholder="password">
-            <button type="submit">Login</button>
+            <div><input type="email" v-model="creds.email" placeholder="email"></div>
+            <div><input type="password" v-model="creds.password" placeholder="password"></div>
+            <div><button type="submit">Login</button></div>
         </form>
         <form v-else @submit.prevent="register">
-            <input type="text" v-model="newUser.username" placeholder="name">
-            <input type="email" v-model="newUser.email" placeholder="email">
-            <input type="password" v-model="newUser.password" placeholder="password">
-            <button type="submit">Create Account</button>
+            <div><input type="text" v-model="newUser.username" placeholder="name"></div>
+            <div><input type="email" v-model="newUser.email" placeholder="email"></div>
+            <div><input type="password" v-model="newUser.password" placeholder="password"></div>
+            <div><button type="submit">Create Account</button></div>
         </form>
         <div @click="loginForm = !loginForm">
             <p v-if="loginForm">No account Click to Register</p>
@@ -21,10 +21,6 @@
 <script>
     export default {
         name: "login",
-        mounted() {
-            //checks for valid session
-            this.$store.dispatch("authenticate");
-        },
         data() {
             return {
                 loginForm: true,

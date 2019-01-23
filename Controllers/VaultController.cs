@@ -34,6 +34,17 @@ namespace keepr.Controllers
       return BadRequest();
     }
 
+    [HttpGet("user/{userId}")]
+    public ActionResult<IEnumerable<Vault>> Get(string userId)
+    {
+      var result = _vaultRepo.GetVaultByUserId(userId);
+      if (result != null)
+      {
+        return Ok(result);
+      }
+      return BadRequest();
+    }
+
     // // POST api/values
     [HttpPost]
     public Vault Post([FromBody] Vault value)

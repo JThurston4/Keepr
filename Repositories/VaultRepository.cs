@@ -40,6 +40,19 @@ namespace keepr.Repositories
       }
 
     }
+    public IEnumerable<Vault> GetVaultByUserId(string userId)
+    {
+      try
+      {
+        return _db.Query<Vault>($"SELECT * FROM Vaults WHERE userId = @userId", new { userId });
+      }
+      catch (Exception ex)
+      {
+        System.Console.WriteLine(ex);
+        return null;
+      }
+
+    }
 
 
     //edit needs work

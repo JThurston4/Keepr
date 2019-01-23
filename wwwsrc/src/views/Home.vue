@@ -1,15 +1,12 @@
 <template>
-  <div>
-    <Navbar></Navbar>
-    <div class="home container-fluid">
-      <div class="card-columns">
-        <div v-for="keep in gotKeeps">
-          <div class="card">
-            <img class="card-img-top" :src="keep.img" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">{{keep.name}}</h5>
-              <p class="card-text">{{keep.description}}</p>
-            </div>
+  <div class="home container-fluid">
+    <div class="card-columns">
+      <div v-for="keep in gotKeeps">
+        <div class="card">
+          <img class="card-img-top" :src="keep.img" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{keep.name}}</h5>
+            <p class="card-text">{{keep.description}}</p>
           </div>
         </div>
       </div>
@@ -18,7 +15,6 @@
 </template>
 
 <script>
-  import Navbar from "@/components/Navbar"
   export default {
     name: "home",
     mounted() {

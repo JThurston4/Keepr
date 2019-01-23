@@ -20,7 +20,10 @@ let api = Axios.create({
 export default new Vuex.Store({
   state: {
     user: {},
-    keeps: []
+    keeps: [],
+    vaults: [],
+    profile: {},
+    vaultKeep: []
   },
   mutations: {
     setUser(state, user) {
@@ -29,7 +32,17 @@ export default new Vuex.Store({
     setKeeps(state, keeps) {
       // debugger
       state.keeps = keeps
-      console.log(state.keeps)
+      console.log("keeps: ", state.keeps)
+    },
+    setVaults(state, vaults) {
+      // debugger
+      state.vaults = vaults
+      console.log("vaults: ", state.vaults)
+    },
+    setVaultKeep(state, vaultKeep) {
+      debugger
+      state.vaultKeep = vaultKeep
+      console.log("vaultKeep: ", state.vaultKeep)
     }
   },
   actions: {
@@ -67,6 +80,17 @@ export default new Vuex.Store({
           console.log('Login Failed')
         })
     },
+    logout({ commit, dispatch }) {
+      auth.delete('Logout')
+        .then(res => {
+          commit('setUser', res.data)
+          router.push({ name: 'login' })
+          dispatch("getKeeps")
+        })
+        .catch(e => {
+          console.log('Logout Failed')
+        })
+    },
     //getting public keeps
     getKeeps({ commit, dispatch }) {
       // debugger
@@ -77,6 +101,28 @@ export default new Vuex.Store({
         .catch(e => {
           console.log("couldn't get keeps")
         })
-    }
+    },
+    getVaults({ commit, dispatch }, uid) {
+      // debugger
+      api.get("Vault/user/" + uid)
+        .then(res => {
+          commit("setVaults", res.data)
+        })
+        .catch(e => {
+          // debugger
+          console.log("couldn't get vaults")
+        })
+    },
+    getVaultKeep({ commit, dispatch }, payload) {
+      debugger
+      api.get("VaultKeep/" + payload.vaultId)
+        .then(res => {
+          commit("setVaultKeep", res.data)
+        })
+        .catch(e => {
+          debugger
+          console.log("couldn't get vaultKeep")
+        })
+    },
   }
 })
