@@ -40,7 +40,7 @@ export default new Vuex.Store({
       console.log("vaults: ", state.vaults)
     },
     setVaultKeep(state, vaultKeep) {
-      debugger
+      // debugger
       state.vaultKeep = vaultKeep
       console.log("vaultKeep: ", state.vaultKeep)
     }
@@ -114,13 +114,14 @@ export default new Vuex.Store({
         })
     },
     getVaultKeep({ commit, dispatch }, payload) {
-      debugger
+      // debugger
       api.get("VaultKeep/" + payload.vaultId)
         .then(res => {
           commit("setVaultKeep", res.data)
+          router.push("/vault")
         })
         .catch(e => {
-          debugger
+          // debugger
           console.log("couldn't get vaultKeep")
         })
     },

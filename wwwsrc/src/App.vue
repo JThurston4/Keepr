@@ -2,7 +2,7 @@
   <div id="app">
     <nav class="navbar navbar-dark bg-primary container-fluid">
       <div class="row w-100">
-        <div class="col-3"><a class="navbar-brand" href="#"><i class="fas fa-lock"> Keepr</i></a>
+        <div class="col-3 logo"><a class="navbar-brand" href="#"><i class="fas fa-lock"> Keepr</i></a>
         </div>
         <div class="col-9 menuItems">
           <div class="row" v-if="getUser.id">
@@ -82,5 +82,14 @@
 
   #nav a.router-link-exact-active {
     color: #42b983;
+  }
+
+  .logo {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .fa-lock {
+    font-size: 25px;
   }
 </style>

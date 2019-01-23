@@ -34,7 +34,7 @@
     },
     methods: {
       getVaultKeep(vaultId) {
-        debugger
+        // debugger
         this.$store.dispatch("getVaultKeep", { vaultId: vaultId, userId: this.getUser.id })
       }
     },
