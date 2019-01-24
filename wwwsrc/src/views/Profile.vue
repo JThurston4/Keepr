@@ -1,27 +1,33 @@
 <template>
-  <div class="profile container-fluid bg">
-    <div class="row">
-      <div class="card border-primary mb-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 vaultCards" v-for="vault in getVaults"
-        style="max-width: 20rem;">
-        <div class="card-body">
-          <img @click="getVaultKeep(vault.id)" class="vaultImg" :src="vault.img">
-          <h4 @click="getVaultKeep(vault.id)" class="card-title">{{vault.name}}</h4>
-          <p class="card-text">{{vault.description}}</p>
-        </div>
+  <div class="profile container-fluid bg2">
+    <div class="row profileDisplay">
+      <!-- jumbo start -->
+      <div class="col-6 centered1" @click="activeView='vaults'">
+        <h1>Your Vaults</h1>
       </div>
+      <div class="col-6 centered2" @click="activeView = 'keeps'">
+        <h1>Your Keeps</h1>
+      </div>
+      <!-- jumbo end -->
+    </div>
+    <div>
+      <VaultsComponent v-if="activeView == 'vaults'"></VaultsComponent>
+      <KeepsComponent v-if="activeView == 'keeps'"></KeepsComponent>
     </div>
   </div>
 </template>
 
 <script>
+  import VaultsComponent from '@/components/VaultsComponent'
+  import KeepsComponent from '@/components/KeepsComponent'
   export default {
     name: 'profile',
     data() {
       return {
         vaultKeep: {
           vaultId: 0,
-          userId: this.getUser.id
-        }
+        },
+        activeView: ''
       }
     },
     computed: {
@@ -38,11 +44,15 @@
         this.$store.dispatch("getVaultKeep", { vaultId: vaultId })
       }
     },
-    components: {},
+    components: {
+      VaultsComponent,
+      KeepsComponent
+    },
     props: [],
     mounted() {
       // debugger
-      this.$store.dispatch("getVaults", this.getUser.id)
+      this.$store.dispatch("getKeepsByUser")
+      this.$store.dispatch("getVaults")
     }
   }
 
@@ -59,5 +69,36 @@
     margin-right: 10px;
     /* display:flex; */
     /* justify-content:space-around; */
+  }
+
+  .profileDisplay {
+    width: 100vw;
+    background-color: #2c2c2c;
+    color: #858c93;
+    height: 15vh;
+  }
+
+  .bg2 {
+    background-image: linear-gradient(to bottom left, #42b983, rgb(153, 168, 253));
+    padding-top: 75px;
+    min-height: 100vh;
+  }
+
+  .jumbotron {
+    background-color: #2c2c2c;
+  }
+
+  .centered1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px rgb(0, 0, 0) solid;
+  }
+
+  .centered2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px rgb(0, 0, 0) solid;
   }
 </style>

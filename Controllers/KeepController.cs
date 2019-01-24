@@ -34,6 +34,18 @@ namespace keepr.Controllers
       return BadRequest();
     }
 
+    [HttpGet("user")]
+    public ActionResult<IEnumerable<Keep>> GetKeeps()
+    {
+      string userId = HttpContext.User.Identity.Name;
+      var result = _keepRepo.GetKeepByUserId(userId);
+      if (result != null)
+      {
+        return Ok(result);
+      }
+      return BadRequest();
+    }
+
     // // POST api/values
     [HttpPost]
     public Keep Post([FromBody] Keep value)

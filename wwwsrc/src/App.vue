@@ -5,10 +5,10 @@
         <div class="col-3 logo"><a class="navbar-brand" href="#"><i class="fas fa-lock navIcon"> Keepr</i></a>
         </div>
         <div class="col-9 menuItems">
-          <div class="row" v-if="getUser.id">
+          <div class="row centered" v-if="getUser.id">
             <!-- <div v-if="getUser"> -->
             <div class="col">
-              <router-link class="home-font" :to="{name: 'home'}">Home</router-link>
+              <router-link class="home-font centered" :to="{name: 'home'}">Home</router-link>
             </div>
             <div class="col">
               <router-link class="home-font" to="/profile">Profile</router-link>
@@ -19,6 +19,7 @@
             <div class="col">
               <router-link @click.native='logout()' class="home-font" to="/login">Logout</router-link>
             </div>
+            <div><button type="button" class="btn btn-info">Add Keep</button></div>
           </div>
           <!-- </div> -->
         </div>

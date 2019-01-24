@@ -41,6 +41,20 @@ namespace keepr.Repositories
 
     }
 
+    public IEnumerable<Keep> GetKeepByUserId(string userId)
+    {
+      try
+      {
+        return _db.Query<Keep>($"SELECT * FROM Keeps WHERE userId = @userId", new { userId });
+      }
+      catch (Exception ex)
+      {
+        System.Console.WriteLine(ex);
+        return null;
+      }
+
+    }
+
 
     //edit needs work
     public Keep EditKeep(int id, Keep newKeep)
