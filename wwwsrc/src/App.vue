@@ -8,7 +8,7 @@
           <div class="row centered" v-if="getUser.id">
             <!-- <div v-if="getUser"> -->
             <div class="col">
-              <router-link class="home-font centered" :to="{name: 'home'}">Home</router-link>
+              <router-link class="home-font" :to="{name: 'home'}">Home</router-link>
             </div>
             <div class="col">
               <router-link class="home-font" to="/profile">Profile</router-link>
@@ -19,7 +19,30 @@
             <div class="col">
               <router-link @click.native='logout()' class="home-font" to="/login">Logout</router-link>
             </div>
-            <div><button type="button" class="btn btn-info">Add Keep</button></div>
+            <div><button type="button" class="btn btn-info" data-toggle="modal" data-target="addkeep">Add Keep</button></div>
+            <!-- modal start -->
+            <!-- <div class="modal" id="addkeep" tabindex="-1">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create a keep</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form @submit.prevent="createKeep()">
+                      <div><input type="text" placeholder="Name" v-model="postKeep.name"></div>
+                      <div><input type="text" placeholder="Description" v-model="postKeep.description"></div>
+                      <div><input type="text" placeholder="Image Url" v-model="postKeep.img"></div>
+                      <div><input type="checkbox" v-model="postKeep.isPrivate">Private</div>
+                      <button type="submit" class="btn btn-primary">Create Keep</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <!-- modal end -->
           </div>
           <!-- </div> -->
         </div>
@@ -34,7 +57,12 @@
     name: 'app',
     data() {
       return {
-
+        postKeep: {
+          name: "",
+          description: "",
+          img: "",
+          isPrivate: 0
+        }
       }
     },
     computed: {

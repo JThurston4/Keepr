@@ -101,4 +101,10 @@
     align-items: center;
     border-left: 1px rgb(0, 0, 0) solid;
   }
+
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>
