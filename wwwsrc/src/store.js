@@ -180,7 +180,7 @@ export default new Vuex.Store({
 
     //delete a keep from vault, pass it vault id in url and requires a vault id and keep id in payload
     deleteKeepFromVault({ commit, dispatch }, payload) {
-      debugger
+      // debugger
       api.delete("VaultKeep/", { data: payload })
         .then(res => {
           dispatch("getVaultKeep2", payload.vaultId)

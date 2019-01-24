@@ -15,7 +15,8 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <div v-for="vault in gotVaults"><button type="button" class="btn btn-outline-secondary" @click="saveKeep(keep.id, vault.id)">{{vault.name}}</button></div>
+                  <div v-for="vault in gotVaults"><button type="button" data-dismiss="modal" class="btn btn-outline-secondary"
+                      @click="saveKeep(keep.id, vault.id)">{{vault.name}}</button></div>
                 </div>
               </div>
             </div>
