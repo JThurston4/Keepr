@@ -1,13 +1,10 @@
 <template>
-  <div class="VaultsComponent">
-    <div class="row addWidth">
-      <div class="card border-primary mb-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 vaultCards" v-for="vault in getVaults"
-        style="max-width: 20rem;">
-        <div class="card-body">
-          <img @click="getVaultKeep(vault.id)" class="vaultImg" :src="vault.img">
-          <h4 @click="getVaultKeep(vault.id)" class="card-title">{{vault.name}}</h4>
-          <p class="card-text cardFont">{{vault.description}}</p>
-        </div>
+  <div class="VaultsComponent col-xl-3 col-lg-4 col-md-6 col-sm-12 componentsStyling">
+    <div class="card h-100 m-3 border-primary">
+      <div class="card-body">
+        <img @click="getVaultKeep(vault.id)" class="vaultImg" :src="vault.img">
+        <h4 @click="getVaultKeep(vault.id)" class="card-title">{{vault.name}}</h4>
+        <p class="card-text cardFont">{{vault.description}}</p>
       </div>
     </div>
   </div>
@@ -21,14 +18,19 @@
 
       }
     },
+    props: ["vault"],
     computed: {
       getVaults() {
         return this.$store.state.vaults
       },
     },
-    methods: {},
+    methods: {
+      getVaultKeep(vaultId) {
+        // debugger
+        this.$store.dispatch("getVaultKeep", { vaultId: vaultId })
+      }
+    },
     components: {},
-    props: [],
   }
 
 </script>

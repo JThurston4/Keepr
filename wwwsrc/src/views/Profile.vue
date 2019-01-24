@@ -10,9 +10,9 @@
       </div>
       <!-- jumbo end -->
     </div>
-    <div>
-      <VaultsComponent v-if="activeView == 'vaults'"></VaultsComponent>
-      <KeepsComponent v-if="activeView == 'keeps'"></KeepsComponent>
+    <div class="row horiCenter">
+      <VaultsComponent v-for="vault in getVaults" v-if="activeView == 'vaults'" :vault="vault"></VaultsComponent>
+      <KeepsComponent v-for="keep in getKeeps" v-if="activeView == 'keeps'" :keep="keep"></KeepsComponent>
     </div>
   </div>
 </template>
@@ -31,6 +31,10 @@
       }
     },
     computed: {
+      getKeeps() {
+        console.log(this.$store.state.userKeeps)
+        return this.$store.state.userKeeps
+      },
       getVaults() {
         return this.$store.state.vaults
       },
@@ -82,6 +86,7 @@
     background-image: linear-gradient(to bottom left, #42b983, rgb(153, 168, 253));
     padding-top: 75px;
     min-height: 100vh;
+    width: 100vw;
   }
 
   .jumbotron {

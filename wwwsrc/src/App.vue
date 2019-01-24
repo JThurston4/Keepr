@@ -19,10 +19,10 @@
             <div class="col">
               <router-link @click.native='logout()' class="home-font" to="/login">Logout</router-link>
             </div>
-            <div><button type="button" class="btn btn-info" data-toggle="modal" data-target="addkeep">Add Keep</button></div>
+            <div><button type="button" class="btn btn-info" data-toggle="modal" data-target="#addkeep">Add Keep</button></div>
             <!-- modal start -->
-            <!-- <div class="modal" id="addkeep" tabindex="-1">
-              <div class="modal-dialog" role="document">
+            <div class="modal" id="addkeep" tabindex="-1">
+              <div class="modal-dialog" role="dialog">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create a keep</h5>
@@ -41,7 +41,7 @@
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
             <!-- modal end -->
           </div>
           <!-- </div> -->
@@ -88,6 +88,8 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    overflow-x: hidden;
+    overflow-y: hidden;
   }
 
   #nav {

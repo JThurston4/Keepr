@@ -1,14 +1,10 @@
 <template>
-  <div class="KeepsComponent">
-    <div class="row">
-      <div class="card border-primary mb-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 vaultCards" v-for="keep in getkeeps"
-        style="max-width: 20rem;">
-        <div class="card-body">
-          {{keep}}
-          <img @click="" class="keepImg" :src="keep.img">
-          <h4 @click="" class="card-title">{{keep.name}}</h4>
-          <p class="card-text">{{keep.description}}</p>
-        </div>
+  <div class="KeepsComponent col-xl-3 col-lg-4 col-md-6 col-12 componentsStyling">
+    <div class="card h-100 m-3 border-primary">
+      <div class="card-body">
+        <img @click="" class="vaultImg" :src="keep.img">
+        <h4 @click="" class="card-title">{{keep.name}}</h4>
+        <p class="card-text">{{keep.description}}</p>
       </div>
     </div>
   </div>
@@ -17,25 +13,29 @@
 <script>
   export default {
     name: 'KeepsComponent',
+    props: ["keep"],
     data() {
       return {
 
       }
     },
     computed: {
-      getKeeps() {
-        console.log(this.$store.state.userKeeps)
-        return this.$store.state.userKeeps
-      }
+
     },
     methods: {},
     components: {},
-    props: [],
   }
 
 </script>
 
 <style>
+  .horiCenter {
+    display: flex;
+    justify-content: center;
+  }
 
-
+  .componentsStyling {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
 </style>

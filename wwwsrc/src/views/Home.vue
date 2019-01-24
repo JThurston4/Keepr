@@ -73,13 +73,9 @@
 
 
 <style>
-  .keepImg {
+  .vaultImg {
     max-width: 16rem;
     max-height: 30vh
-  }
-
-  .card {
-    display: inline-block;
   }
 
   @media (min-width: 34em) {

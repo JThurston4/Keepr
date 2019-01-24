@@ -133,7 +133,7 @@ export default new Vuex.Store({
     },
     //get all keeps by userid
     getKeepsByUser({ commit, dispatch }) {
-      debugger
+      // debugger
       api.get("Keep/user")
         .then(res => {
           commit("setUserKeeps", res.data)
