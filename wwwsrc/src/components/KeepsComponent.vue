@@ -5,8 +5,8 @@
         <img @click="" class="vaultImg" :src="keep.img">
         <h4 @click="" class="card-title">{{keep.name}}</h4>
         <p class="card-text">{{keep.description}}</p>
-        <i class="far fa-eye"></i> {{'\xa0'}} {{'\xa0'}} <i class="fas fa-trash-alt"></i> {{'\xa0'}} {{'\xa0'}} <i
-          class="fas fa-user-secret"></i>
+        <i class="far fa-eye"></i> {{'\xa0'}} {{'\xa0'}} <i class="fas fa-trash-alt" @click="deleteKeep(keep.id)"></i>
+        {{'\xa0'}} {{'\xa0'}} <i class="fas fa-user-secret" v-if="keep.secret==true"></i>
       </div>
     </div>
   </div>
@@ -24,7 +24,11 @@
     computed: {
 
     },
-    methods: {},
+    methods: {
+      deleteKeep(keepId) {
+        this.$store.dispatch("deleteKeep", keepId)
+      }
+    },
     components: {},
   }
 

@@ -4,6 +4,7 @@
       <div class="card-body">
         <img @click="getVaultKeep(vault.id)" class="vaultImg" :src="vault.img">
         <h4 @click="getVaultKeep(vault.id)" class="card-title">{{vault.name}}</h4>
+        <i class="fas fa-trash-alt" @click="deleteVault(vault.id)"></i>
         <p class="card-text cardFont">{{vault.description}}</p>
       </div>
     </div>
@@ -28,6 +29,9 @@
       getVaultKeep(vaultId) {
         // debugger
         this.$store.dispatch("getVaultKeep", { vaultId: vaultId })
+      },
+      deleteVault(vaultid) {
+        this.$store.dispatch("deleteVault", vaultid)
       }
     },
     components: {},

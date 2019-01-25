@@ -211,12 +211,48 @@ export default new Vuex.Store({
     createKeep({ commit, dispatch }, payload) {
       api.post("Keep", payload)
         .then(res => {
-          debugger
+          // debugger
           dispatch("getKeeps")
         })
         .catch(e => {
           // debugger
           console.log("couldn't save Keep")
+        })
+    },
+    createVault({ commit, dispatch }, payload) {
+      // debugger
+      api.post("Vault", payload)
+        .then(res => {
+          // debugger
+          dispatch("getVaults")
+        })
+        .catch(e => {
+          // debugger
+          console.log("couldn't create vault")
+        })
+    },
+    deleteVault({ commit, dispatch }, vaultId) {
+      // debugger
+      api.delete("Vault/" + vaultId, vaultId)
+        .then(res => {
+          // debugger
+          dispatch("getVaults")
+        })
+        .catch(e => {
+          // debugger
+          console.log("couldn't delete vault")
+        })
+    },
+    deleteKeep({ commit, dispatch }, keepId) {
+      // debugger
+      api.delete("Keep/" + keepId, keepId)
+        .then(res => {
+          // debugger
+          dispatch("getKeepsByUser")
+        })
+        .catch(e => {
+          // debugger
+          console.log("couldn't delete vault")
         })
     }
   }

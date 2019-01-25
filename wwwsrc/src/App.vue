@@ -21,6 +21,9 @@
             </div>
             <div>
               <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addkeep">Add Keep</button>
+            </div>{{'\xa0'}}{{'\xa0'}}
+            <div>
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addvault">Add Vault</button>
             </div>
             <!-- modal start -->
 
@@ -30,6 +33,7 @@
         </div>
       </div>
     </nav>
+    <!-- modal start -->
     <div class="modal" id="addkeep" tabindex="-1">
       <div class="modal-dialog" role="dialog">
         <div class="modal-content">
@@ -51,6 +55,29 @@
         </div>
       </div>
     </div>
+    <!-- modal end -->
+    <!-- vault modal start -->
+    <div class="modal" id="addvault" tabindex="-1">
+      <div class="modal-dialog" role="dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create a vault</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form @submit.prevent="createVault()">
+              <div><input type="text" placeholder="Name" v-model="postVault.name"></div>
+              <div><input type="text" placeholder="Description" v-model="postVault.description"></div>
+              <div><input type="text" placeholder="Image Url" v-model="postVault.img"></div>
+              <button type="submit" class="btn btn-primary">Create Vault</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- vault modal end -->
     <router-view />
   </div>
 </template>
@@ -65,6 +92,11 @@
           description: "",
           img: "",
           secret: 0
+        },
+        postVault: {
+          name: "",
+          description: "",
+          img: "",
         }
       }
     },
@@ -79,8 +111,12 @@
         this.$store.dispatch('logout')
       },
       createKeep() {
-        debugger
+        // debugger
         this.$store.dispatch("createKeep", this.postKeep)
+      },
+      createVault() {
+        debugger
+        this.$store.dispatch("createVault", this.postVault)
       }
 
     },

@@ -77,9 +77,9 @@ namespace keepr.Controllers
     {
       if (_keepRepo.DeleteKeep(id))
       {
-        return "deleted keep";
+        return Ok("deleted keep");
       }
-      return "cant delte";
+      return BadRequest("cant delte");
     }
   }
 }
