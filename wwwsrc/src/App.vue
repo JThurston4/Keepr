@@ -19,35 +19,38 @@
             <div class="col">
               <router-link @click.native='logout()' class="home-font" to="/login">Logout</router-link>
             </div>
-            <div><button type="button" class="btn btn-info" data-toggle="modal" data-target="#addkeep">Add Keep</button></div>
-            <!-- modal start -->
-            <div class="modal" id="addkeep" tabindex="-1">
-              <div class="modal-dialog" role="dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create a keep</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <form @submit.prevent="createKeep()">
-                      <div><input type="text" placeholder="Name" v-model="postKeep.name"></div>
-                      <div><input type="text" placeholder="Description" v-model="postKeep.description"></div>
-                      <div><input type="text" placeholder="Image Url" v-model="postKeep.img"></div>
-                      <div><input type="checkbox" v-model="postKeep.isPrivate">Private</div>
-                      <button type="submit" class="btn btn-primary">Create Keep</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
+            <div>
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addkeep">Add Keep</button>
             </div>
+            <!-- modal start -->
+
             <!-- modal end -->
           </div>
           <!-- </div> -->
         </div>
       </div>
     </nav>
+    <div class="modal" id="addkeep" tabindex="-1">
+      <div class="modal-dialog" role="dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create a keep</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form @submit.prevent="createKeep()">
+              <div><input type="text" placeholder="Name" v-model="postKeep.name"></div>
+              <div><input type="text" placeholder="Description" v-model="postKeep.description"></div>
+              <div><input type="text" placeholder="Image Url" v-model="postKeep.img"></div>
+              <div><input type="checkbox" v-model="postKeep.secret">Private</div>
+              <button type="submit" class="btn btn-primary">Create Keep</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <router-view />
   </div>
 </template>
@@ -61,7 +64,7 @@
           name: "",
           description: "",
           img: "",
-          isPrivate: 0
+          secret: 0
         }
       }
     },
@@ -74,7 +77,12 @@
       logout() {
         // debugger
         this.$store.dispatch('logout')
+      },
+      createKeep() {
+        debugger
+        this.$store.dispatch("createKeep", this.postKeep)
       }
+
     },
     components: {},
     props: [],

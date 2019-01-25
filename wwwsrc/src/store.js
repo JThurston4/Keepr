@@ -208,5 +208,16 @@ export default new Vuex.Store({
           console.log("couldn't delete Keep")
         })
     },
+    createKeep({ commit, dispatch }, payload) {
+      api.post("Keep", payload)
+        .then(res => {
+          debugger
+          dispatch("getKeeps")
+        })
+        .catch(e => {
+          // debugger
+          console.log("couldn't save Keep")
+        })
+    }
   }
 })

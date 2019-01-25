@@ -5,6 +5,8 @@
         <img @click="" class="vaultImg" :src="keep.img">
         <h4 @click="" class="card-title">{{keep.name}}</h4>
         <p class="card-text">{{keep.description}}</p>
+        <i class="far fa-eye"></i> {{'\xa0'}} {{'\xa0'}} <i class="fas fa-trash-alt"></i> {{'\xa0'}} {{'\xa0'}} <i
+          class="fas fa-user-secret"></i>
       </div>
     </div>
   </div>
